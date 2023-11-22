@@ -1,0 +1,13 @@
+{
+  "details": {
+    "methodFqn": "com.krispypen.weather.v1.WeatherInfoService.StreamCurrentWeatherInfo"
+  },
+  "requests": [
+    {
+      "location": "StreamCurrentWeatherInfo-request.json"
+    }
+  ],
+  "operationType": "serverStreaming",
+  "invokerName": "grpc",
+  "importStreamId": "db3b3637-09c2-4ae6-a536-3e87e889df36"
+}

@@ -1,0 +1,64 @@
+syntax = "proto3";
+
+package com.krispypen.weather.v1;
+
+service WeatherInfoService {
+  rpc GetCurrentWeatherInfo (GetCurrentWeatherInfoRequest) returns (GetCurrentWeatherInfoResponse) {}
+  rpc StreamCurrentWeatherInfo (StreamCurrentWeatherInfoRequest) returns (stream StreamCurrentWeatherInfoResponse) {}
+  rpc GetLocations (GetLocationsRequest) returns (GetLocationsResponse) {}
+}
+
+message GetCurrentWeatherInfoRequest {
+  string location_id = 1;
+}
+
+message GetCurrentWeatherInfoResponse {
+  oneof main {
+    WeatherInfo weather_info = 1;
+    Error error = 2;
+  }
+}
+
+message WeatherInfo {
+  string message = 1;
+  double temperature = 2;
+  bool is_night = 3;
+  bool is_cloudy = 4;
+  bool is_rainy = 5;
+}
+
+message Error {
+  ErrorType type = 1;
+  map<string, string> message = 2; // key: locale, value: message
+}
+
+enum ErrorType {
+  ERROR_TYPE_UNSPECIFIED = 0;
+  ERROR_TYPE_NOTFOUND = 1;
+  ERROR_TYPE_PERMISSION_DENIED = 2;
+  ERROR_TYPE_BACKEND_GONE = 3;
+  ERROR_TYPE_TOKEN_EXPIRED = 4;
+  ERROR_TYPE_RATE_LIMITED = 5;
+}
+
+message StreamCurrentWeatherInfoRequest {
+  string location_id = 1;
+}
+
+message StreamCurrentWeatherInfoResponse {
+  oneof main {
+    WeatherInfo weather_info = 1;
+    Error error = 2;
+  }
+}
+
+message GetLocationsRequest {}
+
+message GetLocationsResponse {
+  repeated Location locations = 1;
+}
+
+message Location {
+  string id = 1;
+  double name = 2;
+}

@@ -1,0 +1,14 @@
+name: grpc_api
+description: Generated grpc specs
+version: 1.0.0
+homepage: acme.com
+publish_to: none
+
+environment:
+  sdk: ">=2.18.4 <3.0.0"
+
+dependencies:
+  grpc: ^3.1.0
+  protobuf: ^2.0.1
+
+
